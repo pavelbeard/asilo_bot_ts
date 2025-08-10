@@ -5,6 +5,15 @@ import { PROVINCE_MAP } from '../utils/mapper'
 import { TEXT } from './constants'
 import { createLevelOneKeyboard, createLevelTwoKeyboard } from './keyboards'
 
+console.log(
+  !SERVERLESS ? 'Running in local mode' : 'Running in serverless mode'
+)
+console.log(ASILO_BOT ? 'ASILO_BOT is set' : 'ASILO_BOT is not set')
+
+if (!ASILO_BOT) {
+  throw new Error('ASILO_BOT environment variable is not set.')
+}
+
 const bot = new Bot(ASILO_BOT)
 
 bot.command(['start', 'help'], (ctx) => {
@@ -15,7 +24,7 @@ bot.command(['start', 'help'], (ctx) => {
 
 // Level 1 callback query handler
 bot.on('callback_query:data', async ({ callbackQuery, api }) => {
-  const matched = callbackQuery.data?.match(/^action_(\w+|\w+\s\w+)$/)
+  const matched = /^action_([\p{L}]+(?:\s[\p{L}]+)?)$/u.exec(callbackQuery.data)
   const messageChatId = callbackQuery.message?.chat?.id as number
   const messageId = callbackQuery.message?.message_id as number
 
@@ -65,7 +74,9 @@ bot.on('callback_query:data', async ({ callbackQuery, api }) => {
             ' '
           )
           if (k_ === 'internet') {
-            const provinceKey = callbackQuery.data?.replace('action_', '')
+            const provinceKey = callbackQuery.data
+              ?.replace('action_', '')
+              .replace(/\s/g, '_')
             const province = PROVINCE_MAP.get(provinceKey)
             const provinceUrl = province
               ? `https://icp.administracionelectronica.gob.es${province}`
