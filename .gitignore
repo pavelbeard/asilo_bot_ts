@@ -1,0 +1,4 @@
+node_modules/
+asilo.php
+.env.local
+.vercel
