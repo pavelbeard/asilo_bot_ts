@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "node --watch ./api/index.ts",
+    "dev": "tsx --watch ./api/bot.ts",
     "test": "vitest run --watch"
   },
   "keywords": [],
@@ -15,10 +15,12 @@
     "cheerio": "^1.1.2",
     "dotenv": "^17.2.1",
     "grammy": "^1.37.0",
-    "lru-cache": "^11.1.0"
+    "lru-cache": "^11.1.0",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "domhandler": "^5.0.3",
+    "tsx": "^4.20.3",
     "vitest": "^3.2.4"
   }
 }

@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { describe, expect, it, vi } from 'vitest'
-import { getAsylumOptions, getFullInformation } from './actions.ts'
+import { getAsylumOptions, getFullInformation } from './actions'
 
 const getAsiloPhp = async function () {
   const filePath = path.join(

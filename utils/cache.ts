@@ -1,5 +1,5 @@
 import { LRUCache } from 'lru-cache'
-import { getAsylumOptions, getFullInformation } from './actions.ts'
+import { getAsylumOptions, getFullInformation } from './actions'
 
 const options = {
   max: 262144,
